@@ -8,7 +8,7 @@ class Corona:
     portugal_url_base = "https://api.covid19api.com/live/country/portugal/status/confirmed/date/"
     sweden_url_base = "https://api.covid19api.com/live/country/sweden/status/confirmed/date/"
     url_suffix = "T13:13:30Z"
-    range_num = 7
+    range_num = 4
     date_today = datetime.datetime.now()
     start_date = date_today - datetime.timedelta(days=range_num)
     start_date_day = start_date.strftime("%d")
@@ -23,13 +23,16 @@ class Corona:
     rsweden_json = json.loads(rsweden)
 
     portugal_confirmed = []
-    portugal_new = []
+    portugal_new_deaths = []
+    portugal_new_cases = []
     portugal_deaths = []
     portugal_recovered = []
     sweden_confirmed = []
-    sweden_new = []
+    sweden_new_deaths = []
+    portugal_new_cases = []
     sweden_deaths = []
     sweden_recovered = []
+    days_range = []
     fconfirmed = itemgetter("Confirmed")
     fdeaths = itemgetter("Deaths")
     frecovered = itemgetter("Recovered")
@@ -38,12 +41,13 @@ class Corona:
         portugal_confirmed.append(fconfirmed(i))
         portugal_deaths.append(fdeaths(i))
         portugal_recovered.append(frecovered(i))
-    
-    for i in rsweden_json:
+
+    for i in rsweden_json: 
         sweden_confirmed.append(fconfirmed(i))
         sweden_deaths.append(fdeaths(i))
         sweden_recovered.append(frecovered(i))
-    
-    
- 
+
+    for i in range(5): 
+        days_range_items = int(start_date_day) + i
+        days_range.append(days_range_items)
     
