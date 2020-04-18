@@ -30,12 +30,20 @@ class Corona:
     sweden_new = []
     sweden_deaths = []
     sweden_recovered = []
+    fconfirmed = itemgetter("Confirmed")
+    fdeaths = itemgetter("Deaths")
+    frecovered = itemgetter("Recovered")
 
     for i in rportugal_json:
-        fconfirmed = itemgetter("Confirmed")
         portugal_confirmed.append(fconfirmed(i))
-
-    print(portugal_confirmed)
-
+        portugal_deaths.append(fdeaths(i))
+        portugal_recovered.append(frecovered(i))
+    
+    for i in rsweden_json:
+        sweden_confirmed.append(fconfirmed(i))
+        sweden_deaths.append(fdeaths(i))
+        sweden_recovered.append(frecovered(i))
+    
+    
  
     
