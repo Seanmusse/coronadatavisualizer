@@ -3,6 +3,9 @@ import json
 import datetime
 from datetime import timedelta
 from operator import itemgetter
+import matplotlib.pyplot as plt
+import matplotlib.dates
+
 
 class Corona: 
     portugal_url_base = "https://api.covid19api.com/live/country/portugal/status/confirmed/date/"
@@ -47,7 +50,28 @@ class Corona:
         sweden_deaths.append(fdeaths(i))
         sweden_recovered.append(frecovered(i))
 
-    for i in range(5): 
+    for i in range(4): 
         days_range_items = int(start_date_day) + i
         days_range.append(days_range_items)
     
+    # plt.plot_date(days_range, portugal_confirmed, linestyle="solid")
+    # plt.plot_date(days_range, sweden_confirmed, linestyle="solid")
+    # plt.tight_layout()
+    # plt.show()
+
+    fig = plt.figure()
+    plt.subplot(3, 1, 1)
+    plt.ylabel("Confirmed")
+    plt.plot_date(days_range, portugal_confirmed, linestyle="solid", color="g")
+    plt.plot_date(days_range, sweden_confirmed, linestyle="solid", color="b")
+
+    plt.subplot(3, 1, 2)
+    plt.ylabel("Deaths")
+    plt.plot_date(days_range, portugal_deaths, linestyle="solid", color="g")
+    plt.plot_date(days_range, sweden_deaths, linestyle="solid", color="b")
+
+    plt.subplot(3, 1, 3)
+    plt.ylabel("Recovered")
+    plt.plot_date(days_range, portugal_recovered, linestyle="solid", color="g")
+    plt.plot_date(days_range, sweden_recovered, linestyle="solid", color="b")
+    plt.show()
