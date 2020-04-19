@@ -5,9 +5,12 @@ from datetime import timedelta
 from operator import itemgetter
 import matplotlib.pyplot as plt
 import matplotlib.dates
+from matplotlib.font_manager import FontProperties
+import os
 
 
 class Corona: 
+    os.system('cls||clear')
     portugal_url_base = "https://api.covid19api.com/live/country/portugal/status/confirmed/date/"
     sweden_url_base = "https://api.covid19api.com/live/country/sweden/status/confirmed/date/"
     url_suffix = "T13:13:30Z"
@@ -32,7 +35,7 @@ class Corona:
     portugal_recovered = []
     sweden_confirmed = []
     sweden_new_deaths = []
-    portugal_new_cases = []
+    sweden_new_cases = []
     sweden_deaths = []
     sweden_recovered = []
     days_range = []
@@ -50,28 +53,42 @@ class Corona:
         sweden_deaths.append(fdeaths(i))
         sweden_recovered.append(frecovered(i))
 
-    for i in range(4): 
+    for i in range(range_num): 
         days_range_items = int(start_date_day) + i
         days_range.append(days_range_items)
     
-    # plt.plot_date(days_range, portugal_confirmed, linestyle="solid")
-    # plt.plot_date(days_range, sweden_confirmed, linestyle="solid")
-    # plt.tight_layout()
-    # plt.show()
+    def new_cases(country_confirmed):
+    	new_cases = country_confirmed[-1] - country_confirmed[-2]
+    	return new_cases
+    def new_deaths(country_deaths):
+    	country_deaths = country_deaths[-1] - country_deaths[-2]
+    	return country_deaths
 
     fig = plt.figure()
+    fig.suptitle("Portugal - Sweden")
     plt.subplot(3, 1, 1)
     plt.ylabel("Confirmed")
-    plt.plot_date(days_range, portugal_confirmed, linestyle="solid", color="g")
-    plt.plot_date(days_range, sweden_confirmed, linestyle="solid", color="b")
-
+    plt.plot_date(days_range, portugal_confirmed, linestyle="solid", color="#be0027", label="portugal")
+    plt.plot_date(days_range, sweden_confirmed, linestyle="solid", color="#006aa7", label="sweden")
+    plt.legend(loc=0)
     plt.subplot(3, 1, 2)
     plt.ylabel("Deaths")
-    plt.plot_date(days_range, portugal_deaths, linestyle="solid", color="g")
-    plt.plot_date(days_range, sweden_deaths, linestyle="solid", color="b")
-
+    plt.plot_date(days_range, portugal_deaths, linestyle="solid", color="#be0027", label="portugal")
+    plt.plot_date(days_range, sweden_deaths, linestyle="solid", color="#006aa7", label="sweden")
     plt.subplot(3, 1, 3)
     plt.ylabel("Recovered")
-    plt.plot_date(days_range, portugal_recovered, linestyle="solid", color="g")
-    plt.plot_date(days_range, sweden_recovered, linestyle="solid", color="b")
+    plt.plot_date(days_range, portugal_recovered, linestyle="solid", color="#be0027", label="portugal")
+    plt.plot_date(days_range, sweden_recovered, linestyle="solid", color="#006aa7", label="sweden")
+    print("-----------------------Additional information-----------------------")
+    print(" ")
+    print("----------------------------Portugal----------------------")
+    print("New cases: " + str(new_cases(portugal_confirmed)))
+    print("New deaths: " + str(new_deaths(portugal_deaths)))
+    print("-----------------------------Sweden----------------------")
+    print("New cases: " + str(new_cases(sweden_confirmed)))
+    print("New deaths: " + str(new_deaths(sweden_deaths)))
+
+
+
+
     plt.show()
