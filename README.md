@@ -1,8 +1,14 @@
-# coronadatavisualizer
+# Corona data visualizer
 
-## Introduction
+## Overview
 
-This is a simple program that gathers and graphs data pertaining to the COVID-19 pandemic. Input (using a string) the two countries you would like to compare and you'll soon find out the countries number of confirmed cases, deaths, recovered pacients, new cases (currently only of today) and new deaths. 
+This is a simple program that gathers and graphs data pertaining to the COVID-19 pandemic. 
+
+## Features
+
+- [ ] Collects COVID-19 data that the user wants 
+- [ ] Graphs the data 
+- [ ] Gather the Population Density of the two countries chosen 
 
 # Credits 
 https://covid19api.com/
